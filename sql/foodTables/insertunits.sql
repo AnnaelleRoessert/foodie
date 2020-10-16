@@ -1,0 +1,1 @@
+INSERT INTO units(description) VALUES (''), ('g'), ('kg'), ('ml'), ('l'), ('bag'), ('pack'), ('teaspoon'), ('tablespoon'), ('dash of'),('slices');
