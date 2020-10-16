@@ -77,7 +77,7 @@ app.get("/welcome", function (req, res) {
 });
 //registration.js
 app.post("/register", (req, res) => {
-    // console.log("req.body: ", req.body);
+    console.log("req.body: ", req.body);
     const { first, last, email, password } = req.body;
     if (!first || !last || !email || !password) {
         res.json({ success: false });
@@ -86,7 +86,7 @@ app.post("/register", (req, res) => {
             const hashedPW = hashed;
             db.addUser(first, last, email, hashedPW)
                 .then((result) => {
-                    // console.log("id: ", result.rows[0].id);
+                    console.log("id: ", result.rows[0].id);
                     const id = result.rows[0].id;
                     req.session.userId = id;
                     res.json({ success: true });
@@ -99,7 +99,7 @@ app.post("/register", (req, res) => {
 });
 //login.js
 app.post("/login", (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     const { email, password } = req.body;
     if (!email || !password) {
         res.json({ success: false });
@@ -144,7 +144,6 @@ app.post("/resetPasswordStep1", (req, res) => {
                 )
                     .then(() => res.json({ success: true }))
                     .catch((error) => {
-                        //not sure this works
                         res.json({ success: false });
                         console.log(
                             "error in sending new code via email",
@@ -153,7 +152,6 @@ app.post("/resetPasswordStep1", (req, res) => {
                     });
             })
             .catch((error) => {
-                //not sure this works
                 res.json({ success: false });
                 console.log("error in DB adding PW Codes", error);
             });
@@ -188,6 +186,10 @@ app.post("/resetPasswordStep2", (req, res) => {
                 console.log("error in verifying code", error);
             });
     }
+});
+app.get("/logout", (req, res) => {
+    req.session.userId = null;
+    res.redirect("/");
 });
 app.get("*", function (req, res) {
     if (!req.session.userId) {

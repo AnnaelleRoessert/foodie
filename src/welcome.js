@@ -7,7 +7,7 @@ import ResetPassword from "./loggedout/resetPassword";
 export default function Welcome() {
     return (
         <div id="welcome">
-            <h1>Welcome to FOODIE.</h1>
+            <h1>FOODIE.</h1>
             <HashRouter>
                 <div>
                     <Route exact path="/" component={Registration} />
