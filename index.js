@@ -187,6 +187,48 @@ app.post("/resetPasswordStep2", (req, res) => {
             });
     }
 });
+//app.js
+app.get("/userProfile", (req, res) => {
+    const userId = req.session.userId;
+    db.getUserData(userId)
+        .then(({ rows }) => {
+            res.json(rows[0]);
+        })
+        .catch((error) => {
+            res.json({
+                error:
+                    "Sorry, there seems to be a problem with the database! Try to reload!",
+            });
+            console.log("error in get/userProfile in DB ", error);
+        });
+});
+app.post("/modifyProfile", uploader.single("file"), s3.upload, (req, res) => {
+    const userId = req.session.userId;
+    db.modifyProfile(userId, config.s3Url + req.file.filename)
+        .then((result) => {
+            res.json(result.rows[0]);
+        })
+        .catch((error) => {
+            res.json({
+                error:
+                    "Sorry, there is a problem in the database, we could´t update your data!",
+            });
+            console.log("error in adding image to DB", error);
+        });
+});
+app.get("/allrecipes", (req, res) => {
+    db.getAllRecipes()
+        .then((allRecipes) => {
+            console.log("allRecipes: ", allRecipes.rows);
+            res.json(allRecipes.rows);
+        })
+        .catch((error) => {
+            console.log("error in getting all recipes", error);
+            res.json({
+                error: "Sorry we could not load the images from the database!",
+            });
+        });
+});
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/");

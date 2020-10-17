@@ -31,3 +31,17 @@ exports.updatePW = (email, hashedPW) => {
     const params = [email, hashedPW];
     return db.query(q, params);
 };
+exports.getUserData = (userId) => {
+    const q = `SELECT *  FROM users WHERE id=$1`;
+    const params = [userId];
+    return db.query(q, params);
+};
+exports.modifyProfile = (userId, image_url) => {
+    const q = `UPDATE users SET image_url = $2 WHERE id=$1 RETURNING *`;
+    const params = [userId, image_url];
+    return db.query(q, params);
+};
+exports.getAllRecipes = () => {
+    const q = `SELECT * FROM recipes`;
+    return db.query(q);
+};
