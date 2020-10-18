@@ -229,6 +229,20 @@ app.get("/allrecipes", (req, res) => {
             });
         });
 });
+app.get("/recipeDetails/:recipeId", (req, res) => {
+    const { recipeId } = req.params;
+    db.getRecipe(recipeId)
+        .then((recipe) => {
+            console.log("recipe: ", recipe.rows);
+            res.json(recipe.rows);
+        })
+        .catch((error) => {
+            res.json({
+                error: "Sorry, the recipe couldn´t be retrieved from the DB.",
+            });
+            console.log("error in getting recipe from db", error);
+        });
+});
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/");

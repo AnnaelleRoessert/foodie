@@ -42,6 +42,17 @@ exports.modifyProfile = (userId, image_url) => {
     return db.query(q, params);
 };
 exports.getAllRecipes = () => {
-    const q = `SELECT * FROM recipes`;
+    const q = `SELECT id,title,image_url FROM recipes ORDER BY title ASC`;
     return db.query(q);
+};
+exports.getRecipe = (recipeId) => {
+    const q = `SELECT recipes.title,recipes.instructions,quantities.quantity,units.description,ingredients.name
+               FROM recipe_ingredients
+               JOIN recipes ON recipes_id = recipes.id
+               JOIN quantities ON quantities_id = quantities.id
+               JOIN units ON units_id = units.id
+               JOIN ingredients ON ingredients_id = ingredients.id
+               WHERE recipes_id = $1;`;
+    const params = [recipeId];
+    return db.query(q, params);
 };

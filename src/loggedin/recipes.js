@@ -3,6 +3,8 @@ import axios from "../axios";
 export default function Recipes() {
     const [allRecipes, setAllRecipes] = useState();
     const [error, setError] = useState();
+    const [recipeModal, setRecipeModal] = useState(false);
+    const [recipe, setRecipe] = useState();
     useEffect(() => {
         console.log("Recipes has mounted");
         (async () => {
@@ -12,7 +14,6 @@ export default function Recipes() {
                 if (data.error) {
                     setError(data.error);
                 } else {
-                    console.log("url: ", data[0].image_url);
                     setAllRecipes(data);
                 }
             } catch (error) {
@@ -20,13 +21,64 @@ export default function Recipes() {
             }
         })();
     }, []);
-    function showRecipe() {
-        console.log("clicked");
-        // why the hell can´t i give recipe.id as argument????
+    function showRecipe(id) {
+        setRecipeModal(true);
+        const recipeId = id;
+        (async () => {
+            try {
+                const { data } = await axios.get(`/recipeDetails/${recipeId}`);
+                console.log("recipe: ", data);
+                setRecipe(data);
+            } catch (error) {
+                console.log("error in getting recipe details", error);
+            }
+        })();
+    }
+    function closeRecipeModal() {
+        setRecipeModal(false);
     }
     return (
         <div>
-            {error && <h3 className="error">{error}</h3>}
+            <div id="modalMain">
+                {error && <h3 className="error">{error}</h3>}
+                {recipeModal && (
+                    <div id="recipeModal">
+                        <div id="close" onClick={closeRecipeModal}>
+                            X
+                        </div>
+                        {recipe && (
+                            <div id="header">
+                                <h1>{recipe[0].title}</h1>
+                                <br></br>
+                                <p>➡️ {recipe[0].instructions}</p>
+                                <br></br>
+                                <h2> Ingredients:</h2>
+                            </div>
+                        )}
+
+                        {recipe &&
+                            recipe.map((r, i) => {
+                                return (
+                                    <div id="ingredients" key={i}>
+                                        <ul>
+                                            <li>
+                                                {r.quantity} {r.description}{" "}
+                                                {r.name}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                );
+                            })}
+                        <br></br>
+                        <br></br>
+                        <div>
+                            <h3 id="sendrecipe">
+                                Send recipe via mail to: <input></input>
+                            </h3>
+                        </div>
+                    </div>
+                )}
+            </div>
             <div id="recipesMain">
                 {allRecipes &&
                     allRecipes.map((recipe, i) => {
@@ -34,14 +86,13 @@ export default function Recipes() {
                             <div
                                 id="recipeContainer"
                                 key={i}
-                                onClick={showRecipe()}
+                                onClick={() => showRecipe(recipe.id)}
                             >
                                 <img
-                                    src="/foodpictures/almondquiche.jpeg"
-                                    // src={recipe.image_url}??????WHICH PATH
+                                    src={recipe.image_url}
                                     className="recipeImg"
                                 />
-                                <h3 id="recipeName">{recipe.name}</h3>
+                                <h3 className="recipeName">{recipe.title}</h3>
                             </div>
                         );
                     })}

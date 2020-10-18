@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS recipes CASCADE;
 CREATE TABLE recipes(
 id SERIAL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
+title VARCHAR(255) NOT NULL,
 instructions TEXT NOT NULL,
 image_url VARCHAR DEFAULT NULL
 );
@@ -10,8 +10,8 @@ DROP TABLE IF EXISTS recipe_ingredients CASCADE;
 CREATE TABLE recipe_ingredients(
 id SERIAL PRIMARY KEY,
 recipes_id INT REFERENCES recipes(id) NOT NULL,
-quantities_id INT REFERENCES quantities(id) NOT NULL,
-units_id INT REFERENCES units(id) NOT NULL, 
+quantities_id INT REFERENCES quantities(id) ,
+units_id INT REFERENCES units(id) , 
 ingredients_id INT REFERENCES ingredients(id) NOT NULL
 );
 

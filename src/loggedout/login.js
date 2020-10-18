@@ -48,11 +48,11 @@ export default class Login extends React.Component {
                 <button onClick={() => this.submit()}>login</button>
                 <div>
                     Not a member?
-                    <Link to="/">Register</Link>
+                    <Link to="/"> Register</Link>
                 </div>
                 <div>
                     Forgot password?
-                    <Link to="/resetPassword">get a new password</Link>
+                    <Link to="/resetPassword"> Get a new password</Link>
                 </div>
             </div>
         );

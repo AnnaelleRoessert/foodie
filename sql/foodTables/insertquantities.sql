@@ -498,4 +498,4 @@ INSERT INTO quantities(quantity) VALUES (1),
 (498),
 (499),
 (500),
-(0);
+(NULL);

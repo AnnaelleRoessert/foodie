@@ -16,9 +16,9 @@ INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_i
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,2,1,13);
 --avocadobread 3
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,2,11,14);
-INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,20,1,15);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,20,2,15);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,1,1,16);
-INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,501,10,17);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,1,10,17);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,1,8,18);
 --salmonpasta 4
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,3,9,6);
