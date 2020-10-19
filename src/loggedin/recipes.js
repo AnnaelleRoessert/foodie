@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { sendEmail } from "../../ses";
 import axios from "../axios";
 export default function Recipes() {
     const [allRecipes, setAllRecipes] = useState();
     const [error, setError] = useState();
     const [recipeModal, setRecipeModal] = useState(false);
     const [recipe, setRecipe] = useState();
+    const [email, setEmail] = useState();
+    const [success, setSuccess] = useState(false);
+    const [fail, setFail] = useState(false);
     useEffect(() => {
         console.log("Recipes has mounted");
         (async () => {
@@ -36,6 +40,27 @@ export default function Recipes() {
     }
     function closeRecipeModal() {
         setRecipeModal(false);
+        setSuccess(false);
+        setFail(false);
+    }
+    function getEmail({ target }) {
+        setEmail(target.value);
+    }
+    function sendEmail() {
+        const title = recipe[0].title;
+        (async () => {
+            const { data } = await axios.post("/sendRecipeEmail", {
+                email,
+                title,
+            });
+            if (data.success) {
+                console.log("email has been sent");
+                setSuccess(true);
+            } else {
+                console.log("enter valid email");
+                setFail(true);
+            }
+        })();
     }
     return (
         <div>
@@ -71,9 +96,24 @@ export default function Recipes() {
                             })}
                         <br></br>
                         <br></br>
+
                         <div>
                             <h3 id="sendrecipe">
-                                Send recipe via mail to: <input></input>
+                                Send recipe via mail to:{" "}
+                                <input onChange={(e) => getEmail(e)}></input>
+                                <br></br>
+                                <button onClick={sendEmail}>send</button>
+                                {success && (
+                                    <p>
+                                        The recipe has been sent! Enjoy your
+                                        meal!
+                                    </p>
+                                )}
+                                {fail && (
+                                    <p className="error">
+                                        Please enter a valid email address!
+                                    </p>
+                                )}
                             </h3>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import axios from "./axios";
 import Nav from "./loggedin/nav";
 import Recipes from "./loggedin/recipes";
+import FilterRecipes from "./loggedin/filter";
 
 export default function App() {
     const [userProfile, setUserProfile] = useState();
@@ -82,6 +83,7 @@ export default function App() {
                                 name="file"
                                 accept="image/*"
                             />
+                            {/* check useSteforfields in custom hooks */}
                         </div>
                     )}
                     {/* modal end */}
@@ -90,7 +92,11 @@ export default function App() {
                     <div>
                         <Route exact path="/" component={Nav} />
                         <Route exact path="/recipes" component={Recipes} />
-                        {/* <Route exact path="/filter" component={Filter} /> */}
+                        <Route
+                            exact
+                            path="/filterrecipes"
+                            component={FilterRecipes}
+                        />
                         {/* <Route exact path="/profile" component={Profile} /> */}
                     </div>
                 </BrowserRouter>

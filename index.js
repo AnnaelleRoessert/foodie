@@ -243,6 +243,50 @@ app.get("/recipeDetails/:recipeId", (req, res) => {
             console.log("error in getting recipe from db", error);
         });
 });
+app.post("/filteredRecipe", (req, res) => {
+    const ingredient = req.body.ingredients[0];
+    db.getFilteredRecipes(ingredient)
+        .then((recipes) => {
+            console.log("recipes", recipes.rows);
+            res.json(recipes.rows);
+        })
+        .catch((error) => {
+            console.log("error in getting filtered recipes from db", error);
+        });
+});
+app.post("/sendRecipeEmail", (req, res) => {
+    console.log("req.body: ", req.body);
+    const { email, title } = req.body;
+    db.getEmailRecipe(title)
+        .then((recipe) => {
+            console.log("desired recipe: ", recipe.rows);
+            const newTitle = recipe.rows[0].title;
+            const instructions = recipe.rows[0].instructions;
+            const ingredients = [];
+            for (let i = 0; i < recipe.rows.length; i++) {
+                ingredients.push([
+                    recipe.rows[i].quantity,
+                    recipe.rows[i].description,
+                    recipe.rows[i].name,
+                    " -- ",
+                ]);
+            }
+            console.log("ingredients: ", ingredients);
+            ses.sendEmail(
+                email,
+                `Dear FOODIE., To make yourself a delicious ${newTitle}, follow these steps: ${instructions} You need to buy the following ingredients: ${ingredients}.ENJOY!`,
+                `FOODIE.: ${newTitle}`
+            )
+                .then(() => res.json({ success: true }))
+                .catch((error) => {
+                    res.json({ success: false });
+                    console.log("error in sending new code via email", error);
+                });
+        })
+        .catch((error) => {
+            console.log("error in getting desired recipe", error);
+        });
+});
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/");

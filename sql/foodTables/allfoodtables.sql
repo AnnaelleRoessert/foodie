@@ -41,7 +41,7 @@ description VARCHAR(255)
 -- to ask;
 -- for units how to do automatically like 1-500 fe?
 -- in recipes save image_url from public folder? and later if "i cooked it" features is ready with multer?
--- https://dataschool.com/learn-sql/importing-data-from-csv-in-postgresql/
+
 
 -- good to have:
 -- https://www.w3schools.com/sql/sql_alter.asp (how to add/delete columns)

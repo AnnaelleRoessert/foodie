@@ -3,7 +3,7 @@ INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_i
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,125,2,2);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,1,1,3);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,1,7,4);
-INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,4,1,5);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,4,12,5);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(1,3,9,6);
 -- asian pork 2
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,150,2,7);
@@ -12,7 +12,7 @@ INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_i
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,1,1,10);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,1,1,11);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,15,2,12);
-INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,5,1,5);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,5,12,5);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(2,2,1,13);
 --avocadobread 3
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(3,2,11,14);
@@ -27,7 +27,7 @@ INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_i
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,1,1,20);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,1,7,21);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,100,2,22);
-INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,2,8,23);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,100,4,23);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(4,150,4,24);
 --halloumiburger 5
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(5,6,1,25);

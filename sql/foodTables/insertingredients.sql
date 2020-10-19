@@ -5,21 +5,21 @@ VALUES
  ('almond flour', ''),
  ('egg', ''),
  ('bacon', 'meat'),
- ('spring onion', 'vegetable'), --5
+ ('onion', 'vegetable'), --5 spring onion
  ('crème fraîche', ''),
- ('rice',''),
+ ('rice','carb'),
  ('soysauce',''),
- ('porkfilet','meat'),
+ ('pork','meat'),
  ('orange','fruit'), --10
  ('garlic','vegetable'), 
- ('ginger','vegetable'),
+ ('ginger',''),
  ('paprika','vegetable'), 
- ('bread',''),
+ ('bread','carb'),
  ('cream-cheese',''), --15
  ('avocado','vegetable'),
  ('lemon','vegetable'), 
- ('parsley','vegetable'),
- ('spaghetti',''),
+ ('parsley',''),
+ ('pasta','carb'),
  ('onion','vegetable'), --20
  ('smoked salmon','meat'),
  ('spinach','vegetable'),
@@ -28,11 +28,13 @@ VALUES
  ('potatoe','vegetable'), --25
  ('zucchini','vegetable'),
  ('halloumi',''),
- ('burger-buns',''),
+ ('burger-buns','carb'),
  ('cheddar-cheese',''),
  ('dijon-mustard',''),--30
  ('sambal oelek',''),
  ('ketchup',''),
- ('minced meat',''),
- ('tomato','vegetable'); --34
+ ('minced meat','meat'),
+ ('tomato','vegetable'),
+ ('brokkoli','vegetable'),--37
+ ('shrimps', 'meat'); --36
  

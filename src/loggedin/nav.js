@@ -7,7 +7,7 @@ export default function Nav() {
                     <h2 className="appMenuHeader">See all recipes</h2>
                 </div>
             </a>
-            <a href="">
+            <a href="/filterrecipes">
                 <div className="appMenu" id="nav2">
                     <h2 className="appMenuHeader">Find Favs</h2>
                 </div>

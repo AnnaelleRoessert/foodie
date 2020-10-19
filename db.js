@@ -56,3 +56,25 @@ exports.getRecipe = (recipeId) => {
     const params = [recipeId];
     return db.query(q, params);
 };
+exports.getFilteredRecipes = (ingredient) => {
+    const q = `SELECT recipes.id, recipes.title,recipes.image_url
+               FROM recipe_ingredients
+               JOIN recipes ON recipes_id = recipes.id
+               JOIN quantities ON quantities_id = quantities.id
+               JOIN units ON units_id = units.id
+               JOIN ingredients ON ingredients_id = ingredients.id
+               WHERE ingredients.name = $1;`;
+    const params = [ingredient];
+    return db.query(q, params);
+};
+exports.getEmailRecipe = (title) => {
+    const q = `SELECT recipes.title,recipes.instructions,quantities.quantity,units.description,ingredients.name
+               FROM recipe_ingredients
+               JOIN recipes ON recipes_id = recipes.id
+               JOIN quantities ON quantities_id = quantities.id
+               JOIN units ON units_id = units.id
+               JOIN ingredients ON ingredients_id = ingredients.id
+               WHERE recipes.title = $1;`;
+    const params = [title];
+    return db.query(q, params);
+};
