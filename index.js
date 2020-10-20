@@ -202,19 +202,64 @@ app.get("/userProfile", (req, res) => {
             console.log("error in get/userProfile in DB ", error);
         });
 });
-app.post("/modifyProfile", uploader.single("file"), s3.upload, (req, res) => {
+app.post("/modifyImage", uploader.single("file"), s3.upload, (req, res) => {
     const userId = req.session.userId;
-    db.modifyProfile(userId, config.s3Url + req.file.filename)
+    db.modifyImage(userId, config.s3Url + req.file.filename)
         .then((result) => {
             res.json(result.rows[0]);
         })
         .catch((error) => {
-            res.json({
-                error:
-                    "Sorry, there is a problem in the database, we could´t update your data!",
-            });
+            res.json({ error: true });
             console.log("error in adding image to DB", error);
         });
+});
+app.post("/modifyProfile", (req, res) => {
+    console.log("req.body: ", req.body);
+    const { userId } = req.session;
+    let { first, last, email, password } = req.body;
+    db.getUserData(userId).then((userdata) => {
+        console.log("userdata: ", userdata.rows[0]);
+        if (!first) {
+            first = userdata.rows[0].firstname;
+        }
+        if (!last) {
+            last = userdata.rows[0].lastname;
+        }
+        if (!email) {
+            email = userdata.rows[0].email;
+        }
+        if (!password) {
+            password = userdata.rows[0].password;
+            console.log("nopasswordchange: ", first, last, email, password);
+            db.modifyProfile(first, last, email, password, userId)
+                .then(() => {
+                    res.json({ success: true });
+                })
+                .catch((error) => {
+                    console.log("error in modifying profile", error);
+                    res.json({
+                        error:
+                            "Sorry, there is a problem in the database, we could´t update your data!",
+                    });
+                });
+        } else {
+            console.log("passwordchange: ", first, last, email, password);
+            hash(password).then((hashed) => {
+                const hashedPW = hashed;
+                db.modifyProfile(first, last, email, hashedPW, userId)
+                    .then(() => {
+                        res.json({ success: true });
+                    })
+                    .catch((error) => {
+                        console.log("error in modifying profile", error);
+                        res.json({
+                            error:
+                                "Sorry, there is a problem in the database, we could´t update your data!",
+                        });
+                    });
+            });
+        }
+    });
 });
 app.get("/allrecipes", (req, res) => {
     db.getAllRecipes()
@@ -245,14 +290,63 @@ app.get("/recipeDetails/:recipeId", (req, res) => {
 });
 app.post("/filteredRecipe", (req, res) => {
     const ingredient = req.body.ingredients[0];
-    db.getFilteredRecipes(ingredient)
-        .then((recipes) => {
-            console.log("recipes", recipes.rows);
-            res.json(recipes.rows);
-        })
-        .catch((error) => {
-            console.log("error in getting filtered recipes from db", error);
-        });
+    //get veggie recipes
+    if (ingredient === "veggie") {
+        db.getVeggieRecipes()
+            .then((recipes) => {
+                console.log("recipes", recipes.rows);
+                res.json(recipes.rows);
+            })
+            .catch((error) => {
+                console.log("error in getting veggie recipes from db", error);
+            });
+    } else if (ingredient === "vegan") {
+        db.getVeganRecipes()
+            .then((recipes) => {
+                console.log("recipes", recipes.rows);
+                res.json(recipes.rows);
+            })
+            .catch((error) => {
+                console.log("error in getting vegan recipes from db", error);
+            });
+    } else if (ingredient === "lactosefree") {
+        db.getLactosefreeRecipes()
+            .then((recipes) => {
+                console.log("recipes", recipes.rows);
+                res.json(recipes.rows);
+            })
+            .catch((error) => {
+                console.log(
+                    "error in getting lactosefree recipes from db",
+                    error
+                );
+            });
+    } else if (ingredient === "glutenfree") {
+        db.getGlutenfreefreeRecipes()
+            .then((recipes) => {
+                console.log("recipes", recipes.rows);
+                res.json(recipes.rows);
+            })
+            .catch((error) => {
+                console.log(
+                    "error in getting lactosefree recipes from db",
+                    error
+                );
+            });
+    } else {
+        //get recipes with selected ingredient
+        db.getFilteredRecipes(ingredient)
+            .then((recipes) => {
+                console.log("recipes", recipes.rows);
+                res.json(recipes.rows);
+            })
+            .catch((error) => {
+                console.log(
+                    "error in getting all filtered recipes from db",
+                    error
+                );
+            });
+    }
 });
 app.post("/sendRecipeEmail", (req, res) => {
     console.log("req.body: ", req.body);
@@ -264,17 +358,19 @@ app.post("/sendRecipeEmail", (req, res) => {
             const instructions = recipe.rows[0].instructions;
             const ingredients = [];
             for (let i = 0; i < recipe.rows.length; i++) {
-                ingredients.push([
-                    recipe.rows[i].quantity,
-                    recipe.rows[i].description,
-                    recipe.rows[i].name,
-                    " -- ",
-                ]);
+                ingredients.push(
+                    [
+                        " ",
+                        recipe.rows[i].quantity,
+                        recipe.rows[i].description,
+                        recipe.rows[i].name,
+                    ].join(" ")
+                );
             }
             console.log("ingredients: ", ingredients);
             ses.sendEmail(
                 email,
-                `Dear FOODIE., To make yourself a delicious ${newTitle}, follow these steps: ${instructions} You need to buy the following ingredients: ${ingredients}.ENJOY!`,
+                `Dear FOODIE., To make yourself a delicious ${newTitle}, follow these steps: ${instructions} You need to buy the following ingredients: ${ingredients}. ENJOY!`,
                 `FOODIE.: ${newTitle}`
             )
                 .then(() => res.json({ success: true }))
@@ -284,6 +380,7 @@ app.post("/sendRecipeEmail", (req, res) => {
                 });
         })
         .catch((error) => {
+            res.json({ success: false });
             console.log("error in getting desired recipe", error);
         });
 });

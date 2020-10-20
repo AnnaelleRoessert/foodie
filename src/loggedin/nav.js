@@ -14,9 +14,10 @@ export default function Nav() {
             </a>
             <a href="">
                 <div className="appMenu" id="nav3">
-                    <h2 className="appMenuHeader">Fun Stuff</h2>
+                    <h2 className="appMenuHeader">Community</h2>
                 </div>
             </a>
         </div>
     );
 }
+// links!!

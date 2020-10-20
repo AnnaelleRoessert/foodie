@@ -36,9 +36,17 @@ exports.getUserData = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
-exports.modifyProfile = (userId, image_url) => {
+exports.modifyImage = (userId, image_url) => {
     const q = `UPDATE users SET image_url = $2 WHERE id=$1 RETURNING *`;
     const params = [userId, image_url];
+    return db.query(q, params);
+};
+exports.modifyProfile = (first, last, email, hashedPW, userId) => {
+    const q = `UPDATE users
+      SET firstname=$1, lastname=$2, email=$3, password=$4
+      WHERE id=$5;
+    `;
+    const params = [first, last, email, hashedPW, userId];
     return db.query(q, params);
 };
 exports.getAllRecipes = () => {
@@ -67,6 +75,31 @@ exports.getFilteredRecipes = (ingredient) => {
     const params = [ingredient];
     return db.query(q, params);
 };
+exports.getVeggieRecipes = () => {
+    const q = `SELECT recipes.id, recipes.title,recipes.image_url
+               FROM recipes
+               WHERE recipes.veggie = TRUE;`;
+    return db.query(q);
+};
+exports.getVeganRecipes = () => {
+    const q = `SELECT recipes.id, recipes.title,recipes.image_url
+               FROM recipes
+               WHERE recipes.vegan = TRUE;`;
+    return db.query(q);
+};
+exports.getLactosefreeRecipes = () => {
+    const q = `SELECT recipes.id, recipes.title,recipes.image_url
+               FROM recipes
+               WHERE recipes.lactosefree = TRUE;`;
+    return db.query(q);
+};
+exports.getGlutenfreefreeRecipes = () => {
+    const q = `SELECT recipes.id, recipes.title,recipes.image_url
+               FROM recipes
+               WHERE recipes.glutenfree = TRUE;`;
+    return db.query(q);
+};
+
 exports.getEmailRecipe = (title) => {
     const q = `SELECT recipes.title,recipes.instructions,quantities.quantity,units.description,ingredients.name
                FROM recipe_ingredients

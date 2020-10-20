@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "../axios";
+import Email from "./email";
+import CustomerServiceMail from "./customerservicemail";
 export default function FilterRecipes() {
     const [filter, setFilter] = useState(true);
     const [ingredients, setIngredients] = useState([]);
@@ -227,6 +229,41 @@ export default function FilterRecipes() {
                                 <label htmlFor="rice"> 🍚</label>
                             </div>
                         </div>
+                        <div className="category">
+                            <h2>Special Wishes:</h2>
+                            <div className="item">
+                                <input
+                                    type="checkbox"
+                                    name="veggie"
+                                    onChange={(e) => handleChange(e)}
+                                />
+                                <label htmlFor="veggie"> 🥛🌱🧀</label>
+                            </div>
+                            <div className="item">
+                                <input
+                                    type="checkbox"
+                                    name="vegan"
+                                    onChange={(e) => handleChange(e)}
+                                />
+                                <label htmlFor="vegan"> 🌱🤍🌱</label>
+                            </div>
+                            <div className="item">
+                                <input
+                                    type="checkbox"
+                                    name="lactosefree"
+                                    onChange={(e) => handleChange(e)}
+                                />
+                                <label htmlFor="lactosefree"> ❌🥛🧀</label>
+                            </div>
+                            <div className="item">
+                                <input
+                                    type="checkbox"
+                                    name="glutenfree"
+                                    onChange={(e) => handleChange(e)}
+                                />
+                                <label htmlFor="glutenfree"> ❌🍞🍝</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
@@ -284,11 +321,7 @@ export default function FilterRecipes() {
                             })}
                         <br></br>
                         <br></br>
-                        <div>
-                            <h3 id="sendrecipe">
-                                Send recipe via mail to: <input></input>
-                            </h3>
-                        </div>
+                        {recipe && <Email props={recipe[0].title} />}
                     </div>
                 )}
             </div>
@@ -305,6 +338,9 @@ export default function FilterRecipes() {
                     <button onClick={changeIngredient}>
                         change Ingredient
                     </button>
+                    <br></br>
+                    <CustomerServiceMail />
+                    <br></br>
                 </div>
             )}
         </React.Fragment>

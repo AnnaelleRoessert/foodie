@@ -38,8 +38,16 @@ INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_i
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(5,1,8,30);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(5,1,8,31);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(5,1,8,32);
---zoodles
+--zoodles 6
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(6,4,1,26);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(6,1,1,20);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(6,500,2,33);
 INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(6,6,1,34);
+--vegancake 7
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,200,2,37);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,200,2,38);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,120,2,39);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,130,4,40);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,5,9,41);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,2,8,17);
+INSERT INTO recipe_ingredients(recipes_id, quantities_id,units_id, ingredients_id) VALUES(7,100,4,42);

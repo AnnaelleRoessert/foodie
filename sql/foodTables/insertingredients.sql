@@ -35,6 +35,18 @@ VALUES
  ('ketchup',''),
  ('minced meat','meat'),
  ('tomato','vegetable'),
- ('brokkoli','vegetable'),--37
- ('shrimps', 'meat'); --36
+ ('brokkoli','vegetable'),--35
+ ('shrimps', 'meat'),--until here in emoji filters (vegetables, meat and carbs)
+ ('almonds',''),
+ ('cashews',''),
+ ('cocoa powder',''),
+ ('maple syrup',''),--40
+ ('coconut oil',''),
+ ('almond milk','');--42
+
+--  ('',''),
+--  ('',''),
+--  ('',''),
+--  ('',''),
+--  ('',''),
  
