@@ -210,7 +210,8 @@ a {
     color: antiquewhite;
 }
 /* nutrition */
-#nutritionmain {
+#nutritionmain,
+#imageboardmain {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,6 +227,27 @@ a {
     display: flex;
     justify-content: space-around;
 }
+/* imageboard */
+#imageboard {
+    display: grid;
+    grid-template-rows: repeat(auto, 20vw);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2% 2%;
+    margin: 20px 20px;
+    margin-left: -70px;
+}
+#imageboardimage {
+    width: 200px;
+    height: 200px;
+}
+#uploader {
+    display: flex;
+    justify-content: space-between;
+}
+#file {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 /* generals */
 .error {
     color: red;
@@ -240,4 +262,44 @@ button {
     border: rgba(255, 255, 255, 0.5) solid 5px;
     padding: 5px;
     border-radius: 1em;
+}
+button:hover {
+    background-color: #233628;
+    color: antiquewhite;
+}
+/* hiding the actual input */
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+/* styling the "new" input */
+.inputfile + label {
+    color: black;
+    background-color: antiquewhite;
+    border: rgba(255, 255, 255, 0.5) solid 5px;
+    padding: 5px;
+    border-radius: 1em;
+    display: inline-block;
+    cursor: pointer;
+    /* shadows would be nice but only first line works */
+    /* box-shadow: -2px -2px rgb(97, 92, 92);
+    box-shadow: 2px 2px rgb(53, 51, 51); */
+}
+label {
+    padding: 2px;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #233628;
+    color: antiquewhite;
+}
+/* keyboard navigation */
+.inputfile:focus + label {
+    outline: 1px dotted #000;
+    /* trick for obtaining default outline looks on chrome/opera/safari, line 1 for others */
+    outline: -webkit-focus-ring-color auto 5px;
 }

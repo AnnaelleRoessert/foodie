@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
-import axios from "../axios";
+import React, { useEffect } from "react";
 import Nutrition from "./nutrition";
-export default function Community() {
+import Imageboard from "./imageboard";
+export default function Community(username) {
     useEffect(() => {
         console.log("Community has mounted");
+        console.log("props: ", username);
     }, []);
-    return <Nutrition />;
+    return (
+        <React.Fragment>
+            <Nutrition />
+            <Imageboard />
+        </React.Fragment>
+    );
 }

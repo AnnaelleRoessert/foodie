@@ -8,11 +8,16 @@ export default function Nutrition() {
         console.log("Nutrition has mounted");
     }, []);
     function handleChange({ target }) {
-        console.log("nutritioninput: ", target.value);
-        setNutritionReq(target.value);
+        // console.log("nutritioninput: ", target.value);
+        if (target.value === "") {
+            setNutritionReq("");
+            setError("");
+        } else {
+            setNutritionReq(target.value);
+        }
     }
     function getNutritionInfos() {
-        console.log("nutritionreq: ", nutritionReq);
+        // console.log("nutritionreq: ", nutritionReq);
         const options = {
             method: "GET",
             url: "https://rapidapi.p.rapidapi.com/api/nutrition-data",
@@ -66,6 +71,7 @@ export default function Nutrition() {
                 <div id="responsefromapi">
                     <div>
                         <h3>Calories: {response.calories}</h3>
+                        <h3>Est. weight: {response.totalWeight} g</h3>
                         <h3>
                             Cautious about:{" "}
                             <ul>
@@ -113,6 +119,41 @@ export default function Nutrition() {
                             {response.healthLabels.indexOf("VEGETARIAN") > -1
                                 ? "✅"
                                 : "❌"}
+                        </h3>
+                    </div>
+                    <div>
+                        <h3>
+                            Carbs:{" "}
+                            {Math.round(
+                                response.totalNutrients.CHOCDF.quantity
+                            )}{" "}
+                            g
+                        </h3>
+                        <h3>
+                            Fat:{" "}
+                            {Math.round(response.totalNutrients.FAT.quantity)} g
+                        </h3>
+                        <h3>
+                            Fibers:{" "}
+                            {Math.round(response.totalNutrients.FIBTG.quantity)}{" "}
+                            g
+                        </h3>
+                        <h3>
+                            Proteins:{" "}
+                            {Math.round(
+                                response.totalNutrients.PROCNT.quantity
+                            )}{" "}
+                            g
+                        </h3>
+                        <h3>
+                            Sugars:{" "}
+                            {Math.round(response.totalNutrients.SUGAR.quantity)}{" "}
+                            g
+                        </h3>
+                        <h3>
+                            Vitamin C:{" "}
+                            {Math.round(response.totalNutrients.VITC.quantity)}{" "}
+                            g
                         </h3>
                     </div>
                 </div>
