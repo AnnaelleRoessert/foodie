@@ -35,7 +35,7 @@ export default function CustomerServiceMail(props) {
                 Give us some inspiration! What ingredients are you missing?{" "}
                 <br></br>
                 <textarea
-                    placeholder="not working yet :)"
+                    placeholder="coming soon :)"
                     onChange={(e) => getEmail(e)}
                 ></textarea>
                 <br></br>

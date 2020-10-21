@@ -4,17 +4,17 @@ export default function Nav() {
         <div id="appMain">
             <a href="/recipes">
                 <div className="appMenu" id="nav1">
-                    <h2 className="appMenuHeader">See all recipes</h2>
+                    <h1 className="appMenuHeader">See all recipes</h1>
                 </div>
             </a>
             <a href="/filterrecipes">
                 <div className="appMenu" id="nav2">
-                    <h2 className="appMenuHeader">Find Favs</h2>
+                    <h1 className="appMenuHeader">Find Favs</h1>
                 </div>
             </a>
-            <a href="">
+            <a href="/community">
                 <div className="appMenu" id="nav3">
-                    <h2 className="appMenuHeader">Community</h2>
+                    <h1 className="appMenuHeader">Community</h1>
                 </div>
             </a>
         </div>

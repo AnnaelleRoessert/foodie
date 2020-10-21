@@ -63,7 +63,7 @@ export default function FilterRecipes() {
             {filter && (
                 <div>
                     <div id="checkboxheader">
-                        <h1>
+                        <h1 id="chooseingredient">
                             Choose one ingredient you are craving for today!
                         </h1>
                     </div>

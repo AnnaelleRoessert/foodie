@@ -4,6 +4,7 @@ import axios from "./axios";
 import Nav from "./loggedin/nav";
 import Recipes from "./loggedin/recipes";
 import FilterRecipes from "./loggedin/filter";
+import Community from "./loggedin/community";
 
 export default function App() {
     const [userProfile, setUserProfile] = useState();
@@ -212,7 +213,7 @@ export default function App() {
                             path="/filterrecipes"
                             component={FilterRecipes}
                         />
-                        {/* <Route exact path="/profile" component={Profile} /> */}
+                        <Route exact path="/community" component={Community} />
                     </div>
                 </BrowserRouter>
             </main>

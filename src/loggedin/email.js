@@ -36,7 +36,11 @@ export default function Email(props) {
                 <input onChange={(e) => getEmail(e)}></input>
                 <br></br>
                 <button onClick={sendEmail}>send</button>
-                {success && <p>The recipe has been sent! Enjoy your meal!</p>}
+                {success && (
+                    <p className="success">
+                        The recipe has been sent! Enjoy your meal!
+                    </p>
+                )}
                 {fail && (
                     <p className="error">Please enter a valid email address!</p>
                 )}
