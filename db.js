@@ -111,3 +111,23 @@ exports.getEmailRecipe = (title) => {
     const params = [title];
     return db.query(q, params);
 };
+exports.getImages = () => {
+    const q = `SELECT * FROM images ORDER BY id DESC;`;
+    return db.query(q);
+};
+exports.addImagetoDB = (url, username, title, description) => {
+    const q = `INSERT INTO images (url, username, title, description)
+     VALUES ($1, $2, $3, $4) RETURNING *`;
+    const params = [url, username, title, description];
+    return db.query(q, params);
+};
+exports.getWishlist = (userId) => {
+    const q = `SELECT recipe_title FROM wishlist WHERE user_id=$1;`;
+    const params = [userId];
+    return db.query(q, params);
+};
+exports.addToWishlist = (userId, recipe_title) => {
+    const q = `INSERT INTO wishlist (user_id, recipe_title) VALUES($1,$2)`;
+    const params = [userId, recipe_title];
+    return db.query(q, params);
+};

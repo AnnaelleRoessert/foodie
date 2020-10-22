@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
 import Email from "./email";
+import Wishlist from "./wishlist";
+
 export default function Recipes() {
     const [allRecipes, setAllRecipes] = useState();
     const [error, setError] = useState();
@@ -75,6 +77,8 @@ export default function Recipes() {
                         <br></br>
                         <br></br>
                         {recipe && <Email props={recipe[0].title} />}
+                        <br></br>
+                        {recipe && <Wishlist props={recipe[0].title} />}
                     </div>
                 )}
             </div>

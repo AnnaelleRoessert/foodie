@@ -43,6 +43,32 @@ header {
     border: antiquewhite solid 5px;
     border-radius: 50%;
 }
+#heart {
+    font-size: 2cm;
+}
+#heartcontainer {
+    display: flex;
+}
+#heartmodal {
+    position: fixed;
+    top: 30px;
+    left: 50vw;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: auto;
+    padding-bottom: 10px;
+    background-color: antiquewhite;
+    border: rgba(255, 255, 255, 0.5) solid 10px;
+    border-radius: 1em;
+    color: black;
+}
+#wishlistheader {
+    align-self: center;
+}
+#heartX {
+    align-self: flex-end;
+}
 main {
     background-color: #2b2e2c;
 }
@@ -149,7 +175,7 @@ a {
 }
 #recipeModal {
     position: fixed;
-    top: 50px;
+    top: 20px;
     width: 800px;
     /* height: 430px; */
     height: auto;
@@ -236,17 +262,28 @@ a {
     margin: 20px 20px;
     margin-left: -70px;
 }
-#imageboardimage {
+.imageboardimage {
     width: 200px;
     height: 200px;
+    object-fit: cover;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #uploader {
     display: flex;
     justify-content: space-between;
 }
-#file {
+#file2 {
     margin-left: 10px;
     margin-right: 10px;
+}
+.wishlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 /* generals */
 .error {

@@ -5,6 +5,7 @@ import Nav from "./loggedin/nav";
 import Recipes from "./loggedin/recipes";
 import FilterRecipes from "./loggedin/filter";
 import Community from "./loggedin/community";
+import Heart from "./loggedin/heart";
 
 export default function App() {
     const [userProfile, setUserProfile] = useState();
@@ -91,14 +92,17 @@ export default function App() {
             <header>
                 <h1 className="foodie">FOODIE.</h1>
                 {userProfile && (
-                    <img
-                        onClick={modifyProfile}
-                        id="profilepic"
-                        src={
-                            userProfile.image_url ||
-                            "/otherpictures/defaultPic.png"
-                        }
-                    />
+                    <div id="heartcontainer">
+                        <Heart />
+                        <img
+                            onClick={modifyProfile}
+                            id="profilepic"
+                            src={
+                                userProfile.image_url ||
+                                "/otherpictures/defaultPic.png"
+                            }
+                        />
+                    </div>
                 )}
             </header>
             <main>
@@ -219,7 +223,6 @@ export default function App() {
                                 exact
                                 path="/community"
                                 component={Community}
-                                username={userProfile.firstname}
                             />
                         )}
                     </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "../axios";
 import Email from "./email";
 import CustomerServiceMail from "./customerservicemail";
+import Nutrition from "./nutrition";
+import Wishlist from "./wishlist";
 export default function FilterRecipes() {
     const [filter, setFilter] = useState(true);
     const [ingredients, setIngredients] = useState([]);
@@ -322,6 +324,8 @@ export default function FilterRecipes() {
                         <br></br>
                         <br></br>
                         {recipe && <Email props={recipe[0].title} />}
+                        <br></br>
+                        {recipe && <Wishlist props={recipe[0].title} />}
                     </div>
                 )}
             </div>
@@ -343,6 +347,7 @@ export default function FilterRecipes() {
                     <br></br>
                 </div>
             )}
+            <Nutrition />
         </React.Fragment>
     );
 }

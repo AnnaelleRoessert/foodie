@@ -384,6 +384,61 @@ app.post("/sendRecipeEmail", (req, res) => {
             console.log("error in getting desired recipe", error);
         });
 });
+app.get("/images", (req, res) => {
+    console.log("in images");
+    db.getImages()
+        .then((result) => {
+            console.log("resultOnServer: ", result.rows);
+            res.json(result.rows);
+        })
+        .catch((error) => console.log("error in getImages", error));
+});
+app.post(
+    "/imageboardUpload",
+    uploader.single("file"),
+    s3.upload,
+    (req, res) => {
+        const input = JSON.parse(req.body.values);
+        const { title, description, username } = input;
+        db.addImagetoDB(
+            config.s3Url + req.file.filename,
+            username,
+            title,
+            description
+        )
+            .then((result) => {
+                // console.log("result.rows[0]", result.rows[0]);
+                res.json(result.rows[0]);
+            })
+            .catch((error) =>
+                console.log("error in adding imagedata to DB", error)
+            );
+    }
+);
+app.get("/wishlist", (req, res) => {
+    const userId = req.session.userId;
+    db.getWishlist(userId)
+        .then((result) => {
+            console.log("res.rows", result.rows);
+            res.json(result.rows);
+        })
+        .catch((error) => {
+            console.log("error in getting wishlist", error);
+        });
+});
+app.post("/addToWishlist", (req, res) => {
+    const recipe_title = req.body.title;
+    const userId = req.session.userId;
+    db.addToWishlist(userId, recipe_title)
+        .then((result) => {
+            // console.log("result", result);
+            res.json({ success: true });
+        })
+        .catch((error) => {
+            console.log("error in adding wishlist", error);
+            res.json({ success: false });
+        });
+});
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/");
