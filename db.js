@@ -44,7 +44,7 @@ exports.modifyImage = (userId, image_url) => {
 exports.modifyProfile = (first, last, email, hashedPW, userId) => {
     const q = `UPDATE users
       SET firstname=$1, lastname=$2, email=$3, password=$4
-      WHERE id=$5;
+      WHERE id=$5 RETURNING *;
     `;
     const params = [first, last, email, hashedPW, userId];
     return db.query(q, params);

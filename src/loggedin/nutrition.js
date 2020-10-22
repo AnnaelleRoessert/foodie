@@ -55,13 +55,13 @@ export default function Nutrition() {
     return (
         <div id="nutritionmain">
             <h1>
-                Curious about nutritions or unsure if you tolerate some
-                ingredients?
+                Curious about nutritions or unsure if you have intolerances?
             </h1>
             <br></br>
             <input
                 type="text"
                 name="nutrition"
+                autoComplete="off"
                 onChange={(e) => handleChange(e)}
             ></input>
             <br></br>

@@ -55,9 +55,10 @@ header {
     left: 50vw;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    align-items: center;
+    width: 300px;
     height: auto;
-    padding-bottom: 10px;
+    padding: 10px;
     background-color: antiquewhite;
     border: rgba(255, 255, 255, 0.5) solid 10px;
     border-radius: 1em;
@@ -65,9 +66,18 @@ header {
 }
 #wishlistheader {
     align-self: center;
+    color: #233628;
 }
 #heartX {
     align-self: flex-end;
+}
+#mail {
+    display: inline;
+    font-size: 0.5cm;
+}
+#emailcontainer {
+    position: relative;
+    left: -20px;
 }
 main {
     background-color: #2b2e2c;
@@ -284,6 +294,9 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#emailinput {
+    width: 200px;
 }
 /* generals */
 .error {

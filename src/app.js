@@ -72,9 +72,10 @@ export default function App() {
             .then(({ data }) => {
                 if (data.error) {
                     setFail1(true);
-                } else if (data.success) {
+                } else if (data) {
                     console.log("modifiedProfile: ", data);
                     setSuccess1(true);
+                    setUserProfile(data);
                 }
             })
             .catch((error) => console.log("error in getting new image", error));

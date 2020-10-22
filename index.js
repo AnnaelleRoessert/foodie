@@ -232,8 +232,9 @@ app.post("/modifyProfile", (req, res) => {
             password = userdata.rows[0].password;
             console.log("nopasswordchange: ", first, last, email, password);
             db.modifyProfile(first, last, email, password, userId)
-                .then(() => {
-                    res.json({ success: true });
+                .then((result) => {
+                    // res.json(result.rows[0], { success: true });
+                    res.json(result.rows[0]);
                 })
                 .catch((error) => {
                     console.log("error in modifying profile", error);
@@ -410,9 +411,10 @@ app.post(
                 // console.log("result.rows[0]", result.rows[0]);
                 res.json(result.rows[0]);
             })
-            .catch((error) =>
-                console.log("error in adding imagedata to DB", error)
-            );
+            .catch((error) => {
+                res.json({ error: true });
+                console.log("error in adding imagedata to DB", error);
+            });
     }
 );
 app.get("/wishlist", (req, res) => {

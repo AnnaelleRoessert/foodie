@@ -5,6 +5,7 @@ export default function Imageboard() {
     //upload
     const [image, setImage] = useState();
     const [values, setValues] = useState();
+    const [error, setError] = useState(false);
     //render on screen
     const [imageOnScreen, setImageOnScreen] = useState([]);
 
@@ -14,7 +15,15 @@ export default function Imageboard() {
             .get("/images")
             .then(function (res) {
                 // console.log("res from get/images: ", res);
-                setImageOnScreen(res.data);
+                if (res.data.error) {
+                    setError(
+                        <h3 className="error">
+                            Sorry but this image is too large!
+                        </h3>
+                    );
+                } else {
+                    setImageOnScreen(res.data);
+                }
             })
             .catch(function (error) {
                 console.log("error in axios get/images:", error);
@@ -86,6 +95,7 @@ export default function Imageboard() {
                 <br></br>
                 <button onClick={uploader}>upload</button>
             </div>
+            {error && error}
             <div id="imageboard">
                 {imageOnScreen &&
                     imageOnScreen.map((item, i) => {

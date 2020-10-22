@@ -33,9 +33,10 @@ export default function Email(props) {
         <div>
             <h3 id="sendrecipe">
                 Send recipe via mail to:{" "}
-                <input onChange={(e) => getEmail(e)}></input>
+                <input id="emailinput" onChange={(e) => getEmail(e)}></input>
                 <br></br>
                 <button onClick={sendEmail}>send</button>
+                <br></br>
                 {success && (
                     <p className="success">
                         The recipe has been sent! Enjoy your meal!
