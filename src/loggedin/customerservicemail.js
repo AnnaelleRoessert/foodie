@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
-export default function CustomerServiceMail(props) {
-    const [email, setEmail] = useState();
+export default function CustomerServiceMail() {
+    const [emailtext, setEmailText] = useState();
     const [success, setSuccess] = useState(false);
     const [fail, setFail] = useState(false);
 
-    useEffect(() => {
-        console.log("props: ", props);
-    }, []);
+    useEffect(() => {}, []);
 
-    function getEmail({ target }) {
-        setEmail(target.value);
+    function getText({ target }) {
+        setEmailText(target.value);
     }
 
-    function sendEmail() {
-        const title = props.props;
+    function sendWishes() {
         (async () => {
-            const { data } = await axios.post("/sendRecipeEmail", {
-                email,
-                title,
+            const { data } = await axios.post("/sendSuggestions", {
+                emailtext,
             });
             if (data.success) {
                 console.log("email has been sent");
                 setSuccess(true);
+                setFail(false);
             } else {
-                console.log("enter valid email");
+                console.log("enter valid text");
                 setFail(true);
+                setSuccess(false);
             }
         })();
     }
@@ -35,14 +33,20 @@ export default function CustomerServiceMail(props) {
                 Give us some inspiration! What ingredients are you missing?{" "}
                 <br></br>
                 <textarea
-                    placeholder="coming soon :)"
-                    onChange={(e) => getEmail(e)}
+                    id="wishbox"
+                    placeholder="Tell us your wishes!"
+                    onChange={(e) => getText(e)}
                 ></textarea>
                 <br></br>
-                <button onClick={sendEmail}>send</button>
-                {success && <p>Your email has been sent! Thank you FOODIE.!</p>}
+                <button onClick={sendWishes}>send</button>
+                <br></br>
+                {success && (
+                    <p className="success">
+                        Your suggestions have been sent! Thank you FOODIE.!
+                    </p>
+                )}
                 {fail && (
-                    <p className="error">Please enter a valid email address!</p>
+                    <p className="error">Please enter your suggestions!</p>
                 )}
             </h3>
         </div>

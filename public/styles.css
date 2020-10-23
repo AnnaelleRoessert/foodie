@@ -245,6 +245,10 @@ a {
 #chooseingredient {
     color: antiquewhite;
 }
+#wishbox {
+    width: 200px;
+    height: 100px;
+}
 /* nutrition */
 #nutritionmain,
 #imageboardmain {
@@ -274,7 +278,7 @@ a {
 }
 .imageboardimage {
     width: 200px;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
 }
 .card {

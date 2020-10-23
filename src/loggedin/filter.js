@@ -324,7 +324,7 @@ export default function FilterRecipes() {
                         <br></br>
                         <br></br>
                         {recipe && <Email props={recipe[0].title} />}
-                        <br></br>
+
                         {recipe && <Wishlist props={recipe[0].title} />}
                     </div>
                 )}

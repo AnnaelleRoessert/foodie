@@ -6,6 +6,7 @@ export default function Imageboard() {
     const [image, setImage] = useState();
     const [values, setValues] = useState();
     const [error, setError] = useState(false);
+
     //render on screen
     const [imageOnScreen, setImageOnScreen] = useState([]);
 
@@ -47,11 +48,20 @@ export default function Imageboard() {
             .post("/imageboardUpload", formData)
             .then((result) => {
                 console.log("result", result);
-                setImageOnScreen([result.data, ...imageOnScreen]);
+                setImageOnScreen([...imageOnScreen, result.data]);
             })
             .catch((error) => {
                 console.log("error in uploading images", error);
             });
+    }
+    function vote(id) {
+        axios
+            .post("/likes", { id })
+            .then(({ data }) => {
+                console.log("data from likes", data);
+                setImageOnScreen(data);
+            })
+            .catch((error) => console.log("error in getting likes", error));
     }
     console.log("imagesonscreen", imageOnScreen);
     return (
@@ -110,6 +120,9 @@ export default function Imageboard() {
                                     className="imageboardimage"
                                     src={item.url}
                                 ></img>
+                                <p onClick={() => vote(item.id)}>
+                                    🤍 {item.num_of_likes}
+                                </p>
                             </div>
                         );
                     })}

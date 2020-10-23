@@ -433,13 +433,38 @@ app.post("/addToWishlist", (req, res) => {
     const userId = req.session.userId;
     db.addToWishlist(userId, recipe_title)
         .then((result) => {
-            // console.log("result", result);
+            console.log("result", result);
             res.json({ success: true });
         })
         .catch((error) => {
             console.log("error in adding wishlist", error);
             res.json({ success: false });
         });
+});
+app.post("/sendSuggestions", (req, res) => {
+    const text = req.body.emailtext;
+    const foodieEmail = "everlasting.plutonium@spicedling.email";
+    ses.sendEmail(foodieEmail, text, "Suggestions")
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch((error) => {
+            res.json({ success: false });
+            console.log("error in sending email", error);
+        });
+});
+app.post("/likes", (req, res) => {
+    const commentId = req.body.id;
+    console.log("commentid: ", commentId);
+    db.addLikes(commentId)
+        .then((result) => {
+            console.log("result.rows: ", result.rows);
+            db.getImages().then((result) => {
+                console.log(result.rows);
+                res.json(result.rows);
+            });
+        })
+        .catch((error) => console.log("error in posting likes", error));
 });
 app.get("/logout", (req, res) => {
     req.session.userId = null;
