@@ -478,6 +478,6 @@ app.get("*", function (req, res) {
     }
 });
 //server
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
     console.log("I'm listening.");
 });
