@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
+import secrets from "../../secrets.json";
 export default function Nutrition() {
     const [nutritionReq, setNutritionReq] = useState();
     const [response, setResponse] = useState();
@@ -25,8 +26,7 @@ export default function Nutrition() {
             headers: {
                 "x-rapidapi-host":
                     "edamam-edamam-nutrition-analysis.p.rapidapi.com",
-                "x-rapidapi-key":
-                    "e4b741b69amshdd332413942b659p1eb681jsn6f224630e12e",
+                "x-rapidapi-key": secrets.Nutrition_Key,
             },
         };
         axios

@@ -218,7 +218,7 @@ export default function App() {
                             path="/filterrecipes"
                             component={FilterRecipes}
                         />
-                        {/* how can i give those fucking props to community --> imageboard */}
+
                         {userProfile && (
                             <Route
                                 exact
